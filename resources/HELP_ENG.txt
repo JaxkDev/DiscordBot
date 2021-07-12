@@ -1,19 +1,19 @@
 How to setup the bot:
 
-Visit https://github.com/JaxkDev/DiscordBot/wiki
+Visit https://github.com/DiscordBot-PMMP/DiscordBot/wiki
 
 
-
-
+===========================================================================================
 
 
 Config.yml Explained:
 
-version: X				DO NOT EVER TOUCH THIS.
+version: 2				DO NOT EVER TOUCH THIS.
 
 discord:
   token: "ABCD123"		DO NOT EVER SHOW THIS TOKEN TO ANYBODY !!! Paste your discord bots token into here,
   						for how to get/setup the bot and get token, see beginning of file.
+  usePluginCacert: true Leave this alone unless told specifically to disable (set to false)
 
 logging:
   debug: false|true     Log information to screen/console, all debug messages are logged to file by default.
@@ -21,82 +21,4 @@ logging:
   directory: "logs"		What directory to keep log files in, relative from plugin_data/DiscordBot/
 
 
-
-
-
-
-Events.yml Explained:
-
-channels: ["serverID.channelID", "serverID.channelID", ...]
-The . should be left there, Leave array or format empty to disable that event.
-
-format: "Format text here, see FORMATTING Explained for keys that can be used."
-
-
-
-
-
-
-
-FORMATTING Explained:
-
-any fromDiscord format can contain minecraft colour codes eg §6 means all text after that is gold.
-
-any toDiscord format can contain discord features like **BOLD** text, *italic* text, `Quote` text, ```code block`` text.
-
-
-All formats have the following keys available:
-{TIME} (Format: Hours:Minutes:Seconds)
-{USERNAME}
-
-
-
-fromDiscord formats have the following keys also available:
-{USER_ID}
-{USER_DISCRIMINATOR}
-{SERVER_ID}
-{SERVER_NAME}
-
-message Event format also has:
-{MESSAGE}
-{CHANNEL_ID}
-{CHANNEL_NAME}
-
-
-
-toDiscord Command event format also has:
-{COMMAND}
-
-toDiscord Message event format also has:
-{MESSAGE}
-
-
-
-
-Example using every key / format where possible:
-
----
-
-message:
-  toDiscord:
-    format: "[*{TIME}*] **{USERNAME}**: ```{MESSAGE}```"
-  fromDiscord:
-    format: "[{TIME}][({SERVER_ID}){SERVER_NAME}|({CHANNEL_ID}){CHANNEL_NAME}] ({USER_ID}){USERNAME}#{USER_DISCRIMINATOR} : {MESSAGE}"
-
-command:
-  toDiscord:
-    format: "[*{TIME}*] **{USERNAME}** Used command: ```{COMMAND}```"
-
-member_join:
-  toDiscord:
-    format: "[*{TIME}*] **{USERNAME}** Has joined the minecraft server."
-  fromDiscord:
-    format: "[*{TIME}*] {USERNAME}#{USER_DISCRIMINATOR} Has joined the ({SERVER_ID}){SERVER_NAME} discord server."
-
-member_leave:
-  toDiscord:
-    format: "[*{TIME}*] **{USERNAME}** Has left the minecraft server."
-  fromDiscord:
-    format: "[*{TIME}*] ({USER_ID}){USERNAME}#{USER_DISCRIMINATOR} Has left the ({SERVER_ID}){SERVER_NAME} discord server."
-
-...
+===========================================================================================

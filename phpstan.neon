@@ -2,17 +2,10 @@ parameters:
 	level: 8
 	paths:
 		- src
-	excludes_analyse:
-		- vendor/*
+	excludePaths:
+		analyse:
+			- vendor
+			- src/JaxkDev/DiscordBot/Libs
 	bootstrapFiles:
 		- test/bootstrap.php
 	checkMissingIterableValueType: false
-	ignoreErrors:
-		-
-			message: "#^Method Threaded\\:\\:chunk\\(\\) invoked with 1 parameter, 2 required\\.$#"
-			count: 1
-			path: src/JaxkDev/DiscordBot/Communication/BotThread.php
-		-
-			message: "#^Method Threaded\\:\\:chunk\\(\\) invoked with 1 parameter, 2 required\\.$#"
-			count: 3
-			path: src/JaxkDev/DiscordBot/Main.php

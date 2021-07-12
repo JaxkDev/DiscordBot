@@ -14,21 +14,12 @@
             "JaxkDev\\DiscordBot\\": "src/JaxkDev/DiscordBot"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/JaxkDev/DiscordPHPSlim"
-        }
-    ],
     "require": {
-        "php": "^7.3",
-        "team-reflex/discord-php": "dev-stable#v1.0.0"
+        "php": "^7.4||^8.0.3",
+        "team-reflex/discord-php": "^6.0.1"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.12.57",
+        "phpstan/phpstan": "^0.12.82",
         "pocketmine/pocketmine-mp": "^3"
-    },
-    "scripts": {
-        "phpstan": "phpstan analyse"
     }
 }

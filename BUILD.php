@@ -6,27 +6,29 @@
 
 declare(strict_types=1);
 
-echo "Updating dependencies / Removing any dev-dependencies / Optimising Autoloader...\n";
+echo "Installing dependencies, Removing any dev-dependencies & Optimising Autoloader...\n";
 
-passthru("composer update --no-dev -o");
+passthru("composer install --no-dev -o");
 
 echo "Building plugin...\n";
 
 /** @phpstan-ignore-next-line */
-$basePath = rtrim(realpath(__DIR__), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+$basePath = rtrim(realpath(__DIR__), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 
 $includedPaths = array_map(function($path) : string{
-	return rtrim(str_replace("/", DIRECTORY_SEPARATOR, $path), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+	return rtrim(str_replace("/", DIRECTORY_SEPARATOR, $path), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 }, ['src','vendor','resources']);
 
 $excludedPaths = [
 	".md",  // Nobody will look at readme's etc in a phar...
-	"carbon\\lang\\"  // More useless crap not needed and wasting ridiculous amount of space.
+	"carbon\\lang\\",  // More useless crap not needed and wasting ridiculous amount of space.
+	"discord-php\\bin\\",  // VC Binaries, not needed.
+	"vendor\\bin"
 ];
 
-$metadata = generatePluginMetadataFromYml($basePath . "plugin.yml");
-if($metadata === null) {
-	echo "Missing entry point or plugin.yml" . PHP_EOL;
+$metadata = generatePluginMetadataFromYml($basePath."plugin.yml");
+if($metadata === null){
+	echo "Missing entry point or plugin.yml".PHP_EOL;
 	exit(1);
 }
 
@@ -34,8 +36,8 @@ $name = ((!($opt = getopt("o:")) || $opt['o'] === false) ? str_replace(".","_",(
 
 if (!is_dir("dist")) mkdir("dist");
 
-foreach(buildPhar(__DIR__ . DIRECTORY_SEPARATOR . "dist" . DIRECTORY_SEPARATOR . $name, $basePath, $includedPaths, $excludedPaths, $metadata, "<?php __HALT_COMPILER();") as $line){
-	echo $line . PHP_EOL;
+foreach(buildPhar(__DIR__.DIRECTORY_SEPARATOR."dist".DIRECTORY_SEPARATOR.$name, $basePath, $includedPaths, $excludedPaths, $metadata, "<?php __HALT_COMPILER();") as $line){
+	echo $line.PHP_EOL;
 }
 
 /**
@@ -87,13 +89,13 @@ function buildPhar(string $pharPath, string $basePath, array $includedPaths, arr
 	], $excludedPaths), '/');
 
 	$folderPatterns = preg_quote_array([
-		DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR,
-		DIRECTORY_SEPARATOR . '.' //"Hidden" files, git dirs etc
+		DIRECTORY_SEPARATOR.'tests'.DIRECTORY_SEPARATOR,
+		DIRECTORY_SEPARATOR.'.' //"Hidden" files, git dirs etc
 	], '/');
 
 	$basePattern = preg_quote(rtrim($basePath, DIRECTORY_SEPARATOR), '/');
 	foreach($folderPatterns as $p){
-		$excludedSubstrings[] = $basePattern . '.*' . $p;
+		$excludedSubstrings[] = $basePattern.'.*'.$p;
 	}
 
 	$regex = sprintf('/^(?!.*(%s))^%s(%s).*/i',
@@ -117,7 +119,7 @@ function buildPhar(string $pharPath, string $basePath, array $includedPaths, arr
 
 	$phar->stopBuffering();
 
-	yield "Done in " . round(microtime(true) - $start, 3) . "s";
+	yield "Done in ".round(microtime(true) - $start, 3)."s";
 }
 
 /**

@@ -1,8 +1,8 @@
 /vendor/
-/.idea/
 /dist/
 
 *.phar
 *.txt
 
-/TEST.php
+TEST.php
+PHPSTAN.php

@@ -1,11 +1,13 @@
 ---
-version: 1
+version: 2
 
 discord:
-  token: "Long Token with random characters here."
+  token: "Long Token here."
+  usePluginCacert: true
 
 logging:
   debug: false
   maxFiles: 28
   directory: "logs"
+
 ...

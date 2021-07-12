@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JsonSchemaMappingsProjectConfiguration">
+    <state>
+      <map>
+        <entry key="pocketmine-plugin">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="pocketmine-plugin" />
+              <option name="relativePathToSchema" value="https://json.schemastore.org/pocketmine-plugin" />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="plugin.yml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="file://$PROJECT_DIR$/../../PocketMine/FusionCraft - PMMP3/plugins/ComposerTest/plugin.yml" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+      </map>
+    </state>
+  </component>
+</project>
